@@ -4,7 +4,6 @@
 import { Gender, NewPatientData } from "../types";
 
 
-
 const isString = (value: unknown): value is string =>{
 
      return value instanceof String || typeof value ==='string';

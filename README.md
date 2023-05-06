@@ -55,7 +55,6 @@ _Follow the same pattern as the Express Typescript Flight Diary Project_ : https
         gender: parseGender(object.gender),
         occupation: parseString(object.occupation, 'occupation'),
         ssn: parseString(object.ssn, 'occupation'),
-        entries: []
       };
 
     };
