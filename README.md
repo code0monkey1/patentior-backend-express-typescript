@@ -1,6 +1,7 @@
 # patentior-backend-express-typescript
- Patentior ( medical records ) backend express typescript app
-// Follow the same pattern as the Express Typescript Flight Diary Project
+ Patentior ( medical records ) backend express typescript app   controller
+
+_Follow the same pattern as the Express Typescript Flight Diary Project_ : https://github.com/code0monkey1/flight-entries-express-typescript
 
 
 ## Parsing post request :
