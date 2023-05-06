@@ -34,7 +34,7 @@
 
   ```
 
-### It's best to send an individual error for any field that was not present in the post request , while parsing:
+### While parsing , It's best to send an individual error for any field that was not present in the post request
 
 ```javascript
     export const parsePatient = (object: unknown): NewPatient=> {
