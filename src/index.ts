@@ -1,6 +1,8 @@
-import cors from 'cors';
+
 import express from 'express';
 const app = express();
+
+import cors from 'cors';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-call
 app.use(cors());
