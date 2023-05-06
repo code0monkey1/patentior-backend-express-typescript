@@ -56,5 +56,7 @@
         ssn: parseString(object.ssn, 'occupation'),
         entries: []
       };
+
     };
+
 ```
