@@ -10,4 +10,23 @@ router.get("/",(_req,res)=>{
       
 } );
 
+router.post("/", (req,res)=>{
+    
+  try{
+     console.log(req.body);
+    
+    res.send({
+
+    });
+  }catch(err){
+       let error="Error :";
+      
+       if( err instanceof Error )
+            error+=err.message;
+      
+      res.send(error);
+  }
+    
+});
+
 export default router;
