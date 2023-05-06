@@ -20,7 +20,6 @@ const parseDate=(value:unknown,what:string): string =>{
    if(!value || !isString(value) || !isDate(value))
           throw new Error(`Value of ${what} incorrect: ${value}`);
    
-
    return value;
 };
 
@@ -39,6 +38,7 @@ const parseGender=(value:unknown):Gender=>{
    
 
    return value;
+   
 };
 
 const parseString = (value: unknown,what: string):string=>{
