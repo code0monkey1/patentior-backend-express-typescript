@@ -3,7 +3,7 @@ export type Patient = {
   name: string;
   dateOfBirth: string;
   ssn: string;
-  gender: 'male' | 'female' | 'other';
+  gender: Gender;
   occupation: string;
 };
 
@@ -12,3 +12,11 @@ export type Diagnosis = {
   name: string;
   latin?: string;
 };
+
+export enum Gender{
+  FEMALE="female",
+  MALE="male",
+  OTHER="other"
+}
+
+export type NonSensitivePatientData = Omit<Patient,'ssn'>;
