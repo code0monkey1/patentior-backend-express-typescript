@@ -4,7 +4,7 @@ const router = express.Router();
 
 import patients from '../data/patients';
 import patientService from '../services/patientService';
-import { NewPatient } from '../types';
+import { NewPatient, Patient } from '../types';
 import { getUniqueId, toNewPatientData } from '../utils';
 
 router.get("/",(_req,res)=>{
@@ -22,7 +22,9 @@ router.post("/", (req,res)=>{
      const patientWithId :Patient ={...patient,id:getUniqueId()}; 
      patients.push(patientWithId);
 
-    res.json(patient);
+     //send created patient to frontend
+     res.json(patient);
+     
   }catch(err){
        let error="Error :";
       
