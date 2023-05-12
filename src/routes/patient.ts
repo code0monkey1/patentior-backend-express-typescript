@@ -4,7 +4,7 @@ const router = express.Router();
 
 import patients from '../data/patients';
 import patientService from '../services/patientService';
-import { Entry, NewPatient, Patient } from '../types';
+import { NewPatient, Patient } from '../types';
 import { getUniqueId, toNewPatientData } from '../utils';
 
 
@@ -32,7 +32,8 @@ router.post("/", (req,res)=>{
      const newPatient:NewPatient = toNewPatientData(req.body);
 
      // add patient to backend
-     const patient :Patient ={...newPatient,id:getUniqueId(),entries:[] as Entry[]}; 
+     const patient :Patient ={...newPatient,id:getUniqueId()}; 
+     
      patients.push(patient);
      
      //send created patient to frontend

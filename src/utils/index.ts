@@ -3,7 +3,7 @@
 
 import { v4 as uuidv4 } from 'uuid';
 
-import { Gender, NewPatient } from "../types";
+import { Entry, Gender, NewPatient } from "../types";
 
 const isString = (value: unknown): value is string =>{
 
@@ -70,7 +70,8 @@ export const toNewPatientData =(object:unknown):NewPatient=>{
       dateOfBirth:parseDate(object.dateOfBirth,'dateOfBirth'),
       name:parseString(object.name,"name"),
       occupation:parseString(object.occupation,"occupation"),
-      ssn:parseString(object.ssn,"ssn")
+      ssn:parseString(object.ssn,"ssn"),
+      entries:[] as Entry[]
    };
 
 };
