@@ -1,3 +1,4 @@
+import { Entry, Gender, Patient } from "../types";
 
 const data = [
     {
@@ -42,4 +43,8 @@ const data = [
     }
 ];
 
-export default data;
+const patientWithEntries:Patient[]= data
+.map( patient => { return {...patient,entries:[] as Entry[],gender:patient.gender as Gender}; } );
+
+export default patientWithEntries;
+

@@ -1,3 +1,10 @@
+export type Entry={
+ description: string;
+ dateOfCreation:string;
+ specialist:string;
+ diagnosisCode:string;
+};
+
 export type Patient = {
   id: string;
   name: string;
@@ -5,6 +12,7 @@ export type Patient = {
   ssn: string;
   gender: Gender;
   occupation: string;
+  entries:Entry[];
 };
 
 export type Diagnosis = {
@@ -19,6 +27,6 @@ export enum Gender{
   OTHER="other"
 }
 
-export type NonSensitivePatientData = Omit<Patient,'ssn'>;
+export type NonSensitivePatientData = Omit<Patient,'ssn'|'entries'>;
 
-export type NewPatient = Omit<Patient,'id'>;
+export type NewPatient = Omit<Patient,'id'|'entries'>;

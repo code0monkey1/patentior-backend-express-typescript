@@ -3,8 +3,14 @@ import { NonSensitivePatientData, Patient } from "../types";
 
 const getAll=():Array<Patient> =>{
   
-   return patients as Patient[];
+   return patients;
+};
 
+const getPatient=(id:string)=>{
+
+  const patient:Patient|undefined =patients.find(p => p.id === id);
+   
+  return patient;
 };
 
 const getNonSensitivePatientData=():Array<NonSensitivePatientData> =>{
@@ -23,5 +29,6 @@ const getNonSensitivePatientData=():Array<NonSensitivePatientData> =>{
 
 export default {
   getAll,
+  getPatient,
   getNonSensitivePatientData
 };
