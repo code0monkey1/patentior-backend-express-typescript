@@ -16,12 +16,12 @@ router.get("/",(_req,res)=>{
 router.post("/", (req,res)=>{
     
   try{
-     const patient:NewPatient = toNewPatientData(req.body);
+     const newPatient:NewPatient = toNewPatientData(req.body);
     
      // add patient to backend
-     const patientWithId :Patient ={...patient,id:getUniqueId()}; 
-     patients.push(patientWithId);
-
+     const patient :Patient ={...newPatient,id:getUniqueId()}; 
+     patients.push(patient);
+     
      //send created patient to frontend
      res.json(patient);
      
