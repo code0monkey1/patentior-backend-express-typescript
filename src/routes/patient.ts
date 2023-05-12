@@ -2,7 +2,10 @@ import express from 'express';
 
 const router = express.Router();
 
+import patients from '../data/patients';
 import patientService from '../services/patientService';
+import { NewPatient } from '../types';
+import { getUniqueId, toNewPatientData } from '../utils';
 
 router.get("/",(_req,res)=>{
    
@@ -13,11 +16,13 @@ router.get("/",(_req,res)=>{
 router.post("/", (req,res)=>{
     
   try{
-     console.log(req.body);
+     const patient:NewPatient = toNewPatientData(req.body);
     
-    res.send({
+     // add patient to backend
+     const patientWithId :Patient ={...patient,id:getUniqueId()}; 
+     patients.push(patientWithId);
 
-    });
+    res.json(patient);
   }catch(err){
        let error="Error :";
       

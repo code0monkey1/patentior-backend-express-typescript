@@ -1,8 +1,9 @@
 // after turning noImplicitAny to true ,you need to manually
 // put types on  all relevant variable declarations
 
-import { Gender, NewPatientData } from "../types";
+import { v4 as uuidv4 } from 'uuid';
 
+import { Gender, NewPatient } from "../types";
 
 const isString = (value: unknown): value is string =>{
 
@@ -50,7 +51,7 @@ const parseString = (value: unknown,what: string):string=>{
    return value;
 };
 
-export const toNewPatientData =(object:unknown):NewPatientData=>{
+export const toNewPatientData =(object:unknown):NewPatient=>{
    
    if(!object ||typeof object !== "object") {
       throw new Error("Faulty Data Received: "+JSON.stringify(object,null,2));
@@ -72,4 +73,9 @@ export const toNewPatientData =(object:unknown):NewPatientData=>{
       ssn:parseString(object.ssn,"ssn")
    };
 
+};
+
+export const getUniqueId=():string =>{
+
+   return uuidv4();
 };
