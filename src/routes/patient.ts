@@ -9,15 +9,14 @@ import { getUniqueId, toNewPatientData } from '../utils';
 
 router.get("/",(_req,res)=>{
    
-   res.json(patientService.getNonSensitivePatientData());
-      
+   res.json(patientService.getNonSensitivePatientData());    
 } );
 
 router.post("/", (req,res)=>{
     
   try{
      const newPatient:NewPatient = toNewPatientData(req.body);
-    
+
      // add patient to backend
      const patient :Patient ={...newPatient,id:getUniqueId()}; 
      patients.push(patient);
