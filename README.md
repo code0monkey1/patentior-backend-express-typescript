@@ -60,3 +60,36 @@ _Follow the same pattern as the Express Typescript Flight Diary Project_ : https
     };
 
 ```
+---
+
+## Creating a discriminated union for `entries` type in Patient 
+
+
+Let's try to extrapolate the discriminated union from the following patient data listing with entries array :
+
+[Patients List](https://github.com/fullstack-hy2020/misc/blob/master/patients-full.ts "patient entries" )
+
+
+We observe that the following attributes can be extracted to the base entry case : 
+
+ ```javascript
+
+   interface BaseDiagnosisEntry {
+      id: string;
+      description: string;
+      date: string;
+      specialist: string;
+      diagnosisCodes?: Array<Diagnosis['code']>; 
+      // the diagnosis code is based on the `code` attribute
+      // from the Diagnosis type , so it's basically a string
+    }
+
+  //Diagnosis Type Reference :
+      
+    export type Diagnosis = {
+      code: string;
+      name: string;
+      latin?: string;
+    }
+
+ ```
