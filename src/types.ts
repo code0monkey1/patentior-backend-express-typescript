@@ -40,7 +40,7 @@ interface BaseDiagnosisEntry {
 }
 interface Hospital extends BaseDiagnosisEntry {
   type: 'Hospital';
-  discharge: {
+  discharge?: {
     date: string;
     criteria: string;
   };
