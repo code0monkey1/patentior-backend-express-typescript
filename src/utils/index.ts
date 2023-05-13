@@ -62,8 +62,6 @@ export const toNewPatientData =(object:unknown):NewPatient=>{
    if( !('ssn' in object))throw new Error("`ssn` missing in request"+JSON.stringify(object));
    if( !('gender' in object))throw new Error("`gender` missing in request"+JSON.stringify(object));
    if(!('occupation' in object)) throw new Error("`occupation` missing in request"+JSON.stringify(object));
-  
-
 
    return { 
       gender:parseGender(object.gender),
@@ -84,19 +82,67 @@ const parseDiagnosisCodes = (object: unknown): Array<Diagnosis['code']> =>  {
 
   return object.diagnosisCodes as Array<Diagnosis['code']>;
 };
-export const toNewEntriesData=(object:unknown):DiagnosisEntry => {
 
-   if(!object ||typeof object !== "object")  {
-      throw new Error("Invalid object type: " + JSON.stringify(object,null,2) );
+const toNewEntriesData = (data: unknown): DiagnosisEntry => {
+  
+   if (!data || typeof data !== "object") {
+      throw new Error("Not of entry type"+JSON.stringify(data,null,2));
    }
-   
-  return {
-   ...object,
-   diagnosisCodes:parseDiagnosisCodes(object),
-  } as DiagnosisEntry;
 
+   if(!('description' in data))throw new Error("description not found in data"+JSON.stringify(data,null,2));
+   if(!('date' in data))throw new Error("description not found in data"+JSON.stringify(data,null,2));
+   if(!('specialist' in data))throw new Error("description not found in data"+JSON.stringify(data,null,2));
+   if(!('type' in data))throw new Error("type not found in data")+JSON.stringify(data,null,2);
+
+  const baseData= {
+    ...data,
+    id:getUniqueId(),
+    description: parseString(data.description,'description'),
+    date: parseString(data.date,'date'),
+    specialist: parseString(data.specialist,'specialist'),
+    diagnosisCodes: parseDiagnosisCodes(data),
+  };
+
+  return baseData as DiagnosisEntry;
+
+//   if(!('type' in data)) throw new Error('type attribute not present');
+
+//   switch (data.type) {
+//     case 'Hospital':
+
+//       return {
+//         ...baseData,
+//         type: 'Hospital',
+//         discharge: {
+//           date: data.discharge.date!! as string,
+//           criteria: parseString(data.discharge.criteria),
+
+//         },
+//       };
+//     case 'OccupationalHealthcare':
+//       return {
+//         ...baseData,
+//         type: 'OccupationalHealthcare',
+//         employerName: parseString(data.employerName),
+//         sickLeave: data.sickLeave
+//           ? {
+//               startDate: parseDate(data.sickLeave.startDate),
+//               endDate: parseDate(data.sickLeave.endDate),
+//             }
+//           : undefined,
+//       };
+//     case 'HealthCheck':
+//       return {
+//         ...baseData,
+//         type: 'HealthCheck',
+//         healthCheckRating: parseHealthCheckRating(data.healthCheckRating),
+//       };
+//     default:
+//       throw new Error('Incorrect or missing entry type');
+//   }
 };
 
+export default toNewEntriesData;
 
 export const getUniqueId=():string =>{
 

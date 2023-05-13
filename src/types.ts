@@ -29,7 +29,7 @@ export enum Gender{
   Other="other"
 }
 
-interface BaseDiagnosisEntry {
+export interface BaseDiagnosisEntry {
   id: string;
   description: string;
   date: string;
