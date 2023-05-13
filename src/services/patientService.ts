@@ -26,7 +26,7 @@ const getNonSensitivePatientData=():Array<NonSensitivePatientData> =>{
   return nonSensitivePatientData as Array<NonSensitivePatientData>;
 };
 
-const addPatientEntry=(id:string,entry:DiagnosisEntry)=>{
+const addPatientEntry=(id:string,entry:DiagnosisEntry):DiagnosisEntry[]=>{
    
    const patient = patients.find(p => p.id === id);
 
@@ -35,6 +35,8 @@ const addPatientEntry=(id:string,entry:DiagnosisEntry)=>{
    }
 
    patient.entries.push(entry);
+
+   return patient.entries;
 
 };
 
