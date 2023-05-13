@@ -3,7 +3,7 @@
 
 import { v4 as uuidv4 } from 'uuid';
 
-import { DiagnosisEntry, Gender, NewPatient } from "../types";
+import { Diagnosis, DiagnosisEntry, Gender, NewPatient } from "../types";
 
 const isString = (value: unknown): value is string =>{
 
@@ -75,6 +75,28 @@ export const toNewPatientData =(object:unknown):NewPatient=>{
    };
 
 };
+
+const parseDiagnosisCodes = (object: unknown): Array<Diagnosis['code']> =>  {
+  if (!object || typeof object !== 'object' || !('diagnosisCodes' in object)) {
+    // we will just trust the data to be in correct form
+    return [] as Array<Diagnosis['code']>;
+  }
+
+  return object.diagnosisCodes as Array<Diagnosis['code']>;
+};
+export const toNewEntriesData=(object:unknown):DiagnosisEntry => {
+
+   if(!object ||typeof object !== "object")  {
+      throw new Error("Invalid object type: " + JSON.stringify(object,null,2) );
+   }
+   
+  return {
+   ...object,
+   diagnosisCodes:parseDiagnosisCodes(object),
+  } as DiagnosisEntry;
+
+};
+
 
 export const getUniqueId=():string =>{
 

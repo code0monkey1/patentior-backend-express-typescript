@@ -72,3 +72,4 @@ export type DiagnosisEntry = Hospital | OccupationalHealthcare| HealthCheck;
 export type NonSensitivePatientData = Omit<Patient,'ssn'|'entries'>;
 
 export type NewPatient = Omit<Patient,'id'>;
+
