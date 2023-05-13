@@ -92,17 +92,49 @@ We observe that the following attributes can be extracted to the base entry case
       latin?: string;
     }
 
+  // And then define the other types 
+
+ 
+interface Hospital extends BaseDiagnosisEntry {
+  type: 'Hospital';
+  discharge: {
+    date: string;
+    criteria: string;
+  };
+}
+
+interface OccupationalHealthcare extends BaseDiagnosisEntry {
+  type: 'OccupationalHealthcare';
+  employerName: string;
+  sickLeave?: {
+    startDate: string;
+    endDate: string;
+  };
+}
+
+interface HealthCheck extends BaseDiagnosisEntry {
+  type: 'HealthCheck';
+  healthCheckRating: HealthCheckRating;
+}
+
+export enum HealthCheckRating{
+  "Healthy" = 0,
+  "LowRisk" = 1,
+  "HighRisk" = 2,
+  "CriticalRisk" = 3
+}
+
+export type DiagnosisEntry = Hospital | OccupationalHealthcare| HealthCheck;
+
  ```
-
 ---
-
 
 ### Using Omit with Unions :
 
 > An important point concerning unions is that, when you use them with Omit to exclude a property, it works in a possibly unexpected way. Suppose we want to remove the id from each Entry. We could think of using
 > 
 > ```javascript
->       Omit<Entry, 'id'>
+>       Omit<DiagnosisEntry, 'id'>
 >    ```
 > but it wouldn't work as we might expect. In fact, **the resulting type would only contain the common properties, but not the ones they don't share**. A possible workaround is to define a special Omit-like function to deal with such situations:
 > ```javascript
