@@ -40,9 +40,6 @@ interface BaseDiagnosisEntry {
 }
 interface Hospital extends BaseDiagnosisEntry {
   type: 'Hospital';
-  specialist: string;
-  diagnosisCodes: string[];
-  description: string;
   discharge: {
     date: string;
     criteria: string;
@@ -51,10 +48,7 @@ interface Hospital extends BaseDiagnosisEntry {
 
 interface OccupationalHealthcare extends BaseDiagnosisEntry {
   type: 'OccupationalHealthcare';
-  specialist: string;
   employerName: string;
-  diagnosisCodes?: string[];
-  description: string;
   sickLeave?: {
     startDate: string;
     endDate: string;
@@ -63,9 +57,14 @@ interface OccupationalHealthcare extends BaseDiagnosisEntry {
 
 interface HealthCheck extends BaseDiagnosisEntry {
   type: 'HealthCheck';
-  specialist: string;
-  description: string;
-  healthCheckRating: 0 | 1 | 2 | 3;
+  healthCheckRating: HealthCheckRating;
+}
+
+export enum HealthCheckRating{
+   "Healthy" = 0,
+  "LowRisk" = 1,
+  "HighRisk" = 2,
+  "CriticalRisk" = 3
 }
 
 export type DiagnosisEntry = Hospital | OccupationalHealthcare| HealthCheck;
