@@ -3,7 +3,7 @@
 
 import { v4 as uuidv4 } from 'uuid';
 
-import { Diagnosis, DiagnosisEntry, Gender, NewPatient } from "../types";
+import { Diagnosis, DiagnosisEntry, Gender, Patient } from "../types";
 
 const isString = (value: unknown): value is string =>{
 
@@ -51,7 +51,7 @@ const parseString = (value: unknown,what: string):string=>{
    return value;
 };
 
-export const toNewPatientData =(object:unknown):NewPatient=>{
+export const toNewPatientData =(object:unknown):Patient=>{
    
    if(!object ||typeof object !== "object") {
       throw new Error("Faulty Data Received: "+JSON.stringify(object,null,2));
@@ -64,6 +64,7 @@ export const toNewPatientData =(object:unknown):NewPatient=>{
    if(!('occupation' in object)) throw new Error("`occupation` missing in request"+JSON.stringify(object));
 
    return { 
+      id:getUniqueId(),
       gender:parseGender(object.gender),
       dateOfBirth:parseDate(object.dateOfBirth,'dateOfBirth'),
       name:parseString(object.name,"name"),
@@ -104,42 +105,6 @@ const toNewEntriesData = (data: unknown): DiagnosisEntry => {
   };
 
   return baseData as DiagnosisEntry;
-
-//   if(!('type' in data)) throw new Error('type attribute not present');
-
-//   switch (data.type) {
-//     case 'Hospital':
-
-//       return {
-//         ...baseData,
-//         type: 'Hospital',
-//         discharge: {
-//           date: data.discharge.date!! as string,
-//           criteria: parseString(data.discharge.criteria),
-
-//         },
-//       };
-//     case 'OccupationalHealthcare':
-//       return {
-//         ...baseData,
-//         type: 'OccupationalHealthcare',
-//         employerName: parseString(data.employerName),
-//         sickLeave: data.sickLeave
-//           ? {
-//               startDate: parseDate(data.sickLeave.startDate),
-//               endDate: parseDate(data.sickLeave.endDate),
-//             }
-//           : undefined,
-//       };
-//     case 'HealthCheck':
-//       return {
-//         ...baseData,
-//         type: 'HealthCheck',
-//         healthCheckRating: parseHealthCheckRating(data.healthCheckRating),
-//       };
-//     default:
-//       throw new Error('Incorrect or missing entry type');
-//   }
 };
 
 export default toNewEntriesData;

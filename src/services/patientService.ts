@@ -1,5 +1,5 @@
 import patients from '../data/patients';
-import { NonSensitivePatientData, Patient } from "../types";
+import { DiagnosisEntry, NonSensitivePatientData, Patient } from "../types";
 
 const getAll=():Array<Patient> =>{
   
@@ -26,9 +26,30 @@ const getNonSensitivePatientData=():Array<NonSensitivePatientData> =>{
   return nonSensitivePatientData as Array<NonSensitivePatientData>;
 };
 
+const addPatientEntry=(id:string,entry:DiagnosisEntry)=>{
+   
+   const patient = patients.find(p => p.id === id);
+
+   if(!patient) {
+     throw new Error(" Patient Not Found ");
+   }
+
+   patient.entries.push(entry);
+
+};
+
+const addPatient=(newPatient:Patient):Patient => {
+
+     // add patient to backend
+     patients.push(newPatient);
+
+     return newPatient;
+};
 
 export default {
   getAll,
   getPatient,
-  getNonSensitivePatientData
+  getNonSensitivePatientData,
+  addPatientEntry,
+  addPatient
 };

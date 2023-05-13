@@ -1,11 +1,9 @@
 import express from 'express';
+import patientService from '../services/patientService';
+import { DiagnosisEntry, Patient } from '../types';
+import toNewEntriesData, { toNewPatientData } from '../utils';
 
 const router = express.Router();
-
-import patients from '../data/patients';
-import patientService from '../services/patientService';
-import { NewPatient, Patient } from '../types';
-import { getUniqueId, toNewPatientData } from '../utils';
 
 
 router.get("/",(_req,res)=>{
@@ -29,15 +27,11 @@ router.get("/:id",(req,res)=>{
 router.post("/", (req,res)=>{
     
   try{
-     const newPatient:NewPatient = toNewPatientData(req.body);
-
-     // add patient to backend
-     const patient :Patient ={...newPatient,id:getUniqueId()}; 
+     const newPatient:Patient = toNewPatientData(req.body);
      
-     patients.push(patient);
-     
-     //send created patient to frontend
-     res.json(patient);
+     patientService.addPatient(newPatient);
+ 
+     res.json(newPatient);
      
   }catch(err){
        let error="Error :";
@@ -51,8 +45,24 @@ router.post("/", (req,res)=>{
 });
 
 router.post('/:id/entries', (req, res) =>{
-   console.log("The id is",req.params.id);
-   res.end();
+   
+  try{
+
+     const entry:DiagnosisEntry  = toNewEntriesData(req.body);
+     
+     const savedEntry = patientService.addPatientEntry(req.params.id,entry);
+
+     res.json(savedEntry);
+     
+    }catch(err){
+     
+      let error="Error :";
+      
+       if( err instanceof Error )
+            error+=err.message;
+      
+      res.send(error);
+   }
 });
 
 export default router;
