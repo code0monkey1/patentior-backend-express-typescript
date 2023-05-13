@@ -37,7 +37,6 @@ const addPatientEntry=(id:string,entry:DiagnosisEntry):DiagnosisEntry[]=>{
    patient.entries.push(entry);
 
    return patient.entries;
-
 };
 
 const addPatient=(newPatient:Patient):Patient => {
