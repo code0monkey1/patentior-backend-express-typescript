@@ -1,8 +1,10 @@
 export type Entry={
+ id:string;
  description: string;
- dateOfCreation:string;
+ date:string;
+ type:string;
  specialist:string;
- diagnosisCode:string;
+ diagnosisCodes:string[];
 };
 
 export type Patient = {
@@ -12,7 +14,7 @@ export type Patient = {
   ssn: string;
   gender: Gender;
   occupation: string;
-  entries:Entry[];
+  entries:DiagnosisEntry[];
 };
 
 export type Diagnosis = {
@@ -22,10 +24,47 @@ export type Diagnosis = {
 };
 
 export enum Gender{
-  FEMALE="female",
-  MALE="male",
-  OTHER="other"
+  Female="female",
+  Male="male",
+  Other="other"
 }
+
+interface BaseDiagnosisEntry {
+  id: string;
+  date: string;
+}
+
+interface HospitalEntry extends BaseDiagnosisEntry {
+  type: 'Hospital';
+  specialist: string;
+  diagnosisCodes: string[];
+  description: string;
+  discharge: {
+    date: string;
+    criteria: string;
+  };
+}
+
+interface OccupationalHealthcareEntry extends BaseDiagnosisEntry {
+  type: 'OccupationalHealthcare';
+  specialist: string;
+  employerName: string;
+  diagnosisCodes?: string[];
+  description: string;
+  sickLeave?: {
+    startDate: string;
+    endDate: string;
+  };
+}
+
+interface HealthCheckEntry extends BaseDiagnosisEntry {
+  type: 'HealthCheck';
+  specialist: string;
+  description: string;
+  healthCheckRating: 0 | 1 | 2 | 3;
+}
+
+export type DiagnosisEntry = HospitalEntry | OccupationalHealthcareEntry | HealthCheckEntry;
 
 export type NonSensitivePatientData = Omit<Patient,'ssn'|'entries'>;
 
