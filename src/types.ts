@@ -31,9 +31,11 @@ export enum Gender{
 
 interface BaseDiagnosisEntry {
   id: string;
+  description: string;
   date: string;
+  specialist: string;
+  diagnosisCodes?: Array<Diagnosis['code']>;
 }
-
 interface HospitalEntry extends BaseDiagnosisEntry {
   type: 'Hospital';
   specialist: string;
