@@ -34,7 +34,9 @@ interface BaseDiagnosisEntry {
   description: string;
   date: string;
   specialist: string;
-  diagnosisCodes?: Array<Diagnosis['code']>;
+  diagnosisCodes?: Array<Diagnosis['code']>; 
+  // the diagnosis code is based on the `code` attribute
+  // from the Diagnosis type
 }
 interface HospitalEntry extends BaseDiagnosisEntry {
   type: 'Hospital';
