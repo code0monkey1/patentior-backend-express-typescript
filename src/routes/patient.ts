@@ -50,4 +50,9 @@ router.post("/", (req,res)=>{
     
 });
 
+router.post('/:id/entries', (req, res) =>{
+   console.log("The id is",req.params.id);
+   res.end();
+});
+
 export default router;
