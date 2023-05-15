@@ -91,8 +91,8 @@ const toNewEntriesData = (data: unknown): DiagnosisEntry => {
    }
 
    if(!('description' in data))throw new Error("description not found in data"+JSON.stringify(data,null,2));
-   if(!('date' in data))throw new Error("description not found in data"+JSON.stringify(data,null,2));
-   if(!('specialist' in data))throw new Error("description not found in data"+JSON.stringify(data,null,2));
+   if(!('date' in data))throw new Error("date not found in data"+JSON.stringify(data,null,2));
+   if(!('specialist' in data))throw new Error("specialist not found in data"+JSON.stringify(data,null,2));
    if(!('type' in data))throw new Error("type not found in data")+JSON.stringify(data,null,2);
 
   const baseData= {
