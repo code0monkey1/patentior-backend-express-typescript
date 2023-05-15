@@ -26,7 +26,7 @@ const getNonSensitivePatientData=():Array<NonSensitivePatientData> =>{
   return nonSensitivePatientData as Array<NonSensitivePatientData>;
 };
 
-const addPatientEntry=(id:string,entry:DiagnosisEntry):DiagnosisEntry[]=>{
+const addPatientDiagnosisEntry=(id:string,entry:DiagnosisEntry):DiagnosisEntry[]=>{
    
    const patient = patients.find(p => p.id === id);
 
@@ -51,6 +51,6 @@ export default {
   getAll,
   getPatient,
   getNonSensitivePatientData,
-  addPatientEntry,
+  addPatientDiagnosisEntry,
   addPatient
 };
