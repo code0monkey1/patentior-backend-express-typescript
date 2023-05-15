@@ -50,7 +50,7 @@ router.post('/:id/entries', (req, res) =>{
 
      const entry:DiagnosisEntry  = toNewEntriesData(req.body);
      
-     const savedEntry = patientService.addPatientEntry(req.params.id,entry);
+     const savedEntry = patientService.addPatientDiagnosisEntry(req.params.id,entry);
 
      res.json(savedEntry);
      
