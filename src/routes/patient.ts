@@ -61,7 +61,7 @@ router.post('/:id/entries', (req, res) =>{
        if( err instanceof Error )
             error+=err.message;
       
-      res.send(error);
+      res.status(400).send(error);
    }
 });
 
