@@ -7,7 +7,6 @@ import { Diagnosis } from "../types";
   
 };
 
-
 export default {
   getAll
 };
